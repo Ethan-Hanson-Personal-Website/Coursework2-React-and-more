@@ -1,0 +1,134 @@
+1:in the assignment the direction of Refactor the Starting Point
+
+    Delete the prebuilt counter example as follows: delete all the JSX code except for one parent div element.
+        Remember that all JSX code must be returned within one parent element or fragment.
+    Delete the line that include the useState hook.
+    Delete all the unused import statements.
+    Save the application, and then go to your browser. Notice the empty page, and then congratulate yourself.
+" does not appear to say which jsx to delete. After reviewing the two I think its refering to app (confused since the last instruction refered me to main) since it is the jsx that has divs.
+
+2:same instructions as above but wondering how much total code to delete so changed "import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <>
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
+}
+
+export default App" 
+.....................................................
+into
+.....................................................
+"import './App.css'
+
+function App() {
+
+  return (
+    <>
+      <div>
+       
+      </div>
+    </>
+  )
+}
+
+export default App"
+.........................................................
+Am hoping that this was correct (*it was)
+
+3:This Part greatly confused me, as i had no clue where It wanted me to place the chunk of code
+....................................................................
+    Note that you can write the syntax for this callback in two ways:
+        As an arrow function:
+            onClick={()=>{}}
+        As a function that appears before the return statement and then gets passed to onClick:
+
+function App() {
+  const [puppies, setPuppies] = useState(puppyList);
+  const [featPupId, setFeatPupId] = useState(null);
+
+  function handleClick() {
+    // some logic here
+  }
+
+  return (
+    <div className="App">
+      {puppies.map((puppy) => {
+        return (
+          <p onClick={handleClick} key={puppy.id}>
+            {puppy.name}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+    For now, keep things simple by passing the following arrow function to onClick:
+        onClick={()=>{}}
+    Inside the body of the array function, add a console.log statement (to find out if you can display puppy.id):
+        {()=>{console.log("puppy id: ", puppy.id)}}
+    Refresh the page, click a puppy's name, and observe the ID logged to your browser console.
+..............................................................................................................................................
+the answer was Litterally and i was not taking the question to be litteral so that's on me
+.................................................................................................................................
+<p onClick={()=>{console.log("puppy id: ", puppy.id)}} key={puppy.id}>
+        {puppy.name}
+     </p>//basically generated the list onto my html page via js. Also generated each instances ids.
+     );
+............................................................................................................................
+4:Okay Im sorry but this really was confusing
+.................................................................................................................................
+To do so, complete the following steps:
+
+    After the click handlers but before the return statement, create a variable named featuredPup. Use the Array.find() method to find the puppy with a matching ID, as the following code shows:
+        const featuredPup = puppies.find((pup)=> pup.id === featPupId)
+    Notice that the callback function passed to find searches for a puppy with an id property that matches the featPupId state value.
+    On the next line, call console.log() for featuredPup.
+    Check the browser. As you click different names, you should observe the featured puppy data logged to the console.
+  ...............................................................................................................................
+  specifically "After the click handlers but before the return statement". Like am i just missunderstanding
+  ................................................................................................................................
+  return (
+    <>
+      <div className="App">
+      { 
+   puppies.map((puppy) => {
+     return (
+      <p onClick={()=>{setFeatPupId(puppy.id)}} key={puppy.id}>
+        {puppy.name}
+     </p>//basically generated the list onto my html page via js. Also generated each instances ids.
+     );//added the code for the button click
+   })
+   }
+  .........................................................................................
+  In my mind the code reads | Return->ClickHandler | so where am i supposed to create this variable?
+  *okay so i just had to place it with the other variables, wording was a bit confusing.
+  
+  5:
