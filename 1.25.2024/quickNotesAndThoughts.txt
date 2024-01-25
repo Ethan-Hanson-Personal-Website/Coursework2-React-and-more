@@ -1,0 +1,46 @@
+*react can import api
+*will need to import useEffect from react
+*///////////////////////////////////////////////////////
+import { useEffect, useState } from 'react';
+
+function App() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Define the async function
+    async function fetchData() {
+      // Make the API request
+      const response = await fetch(api_url);
+      // Parse the response as JSON
+      const data = await response.json();
+      // Update the state with the data
+      setData(data);
+    }
+
+    // Call the function
+    fetchData();
+  }, []); // Empty array means the effect runs once on mount
+
+  return (
+    <div>
+      {data ? (
+        <div>
+          <h1>{data.name}</h1>
+          {/* Display other data fields as needed */}
+        </div>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </div>
+  );
+}
+
+export default App;
+//////////////////////////////////////////////////////////
+*some things i found
+  *useEffect is a hook in React that allows you to perform side effects in function components. 
+   Side effects could be data fetching, subscriptions, or manually changing the DOM.
+   It serves the same purpose as componentDidMount, componentDidUpdate, and componentWillUnmount combined in class components.
+
+The useEffect hook takes two arguments: a function and an array of dependencies. The function is the side effect that you want to run.
+ The dependencies array is a list of variables that the effect depends on. If any of these variables change, the effect will run again.*
