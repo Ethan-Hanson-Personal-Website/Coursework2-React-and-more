@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function SignUpSheet({setToken}) {
     const [username, setUsername] = useState("");
@@ -42,3 +43,6 @@ export default function SignUpSheet({setToken}) {
         </>
     );
 }
+SignUpSheet.propTypes = {
+    setToken: PropTypes.func.isRequired,
+};
