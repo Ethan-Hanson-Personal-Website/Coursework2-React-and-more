@@ -4,12 +4,12 @@ import SignUpSheet from './components/SignUpForm'
 import './App.css'
 
 function App() {
-  //const [count, setCount] = useState(0)
+  const [token, setToken] = useState(null);
 
   return (
     <>
-        <Authenticate />
-        <SignUpSheet />
+        <Authenticate token={token} setToken={setToken}/>
+        <SignUpSheet token={token} setToken={setToken}/>
             
     </>
   )
