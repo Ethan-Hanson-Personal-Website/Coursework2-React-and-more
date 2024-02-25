@@ -1,0 +1,14 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "Second hald of the Class assignments",
+  "main": "index.js",
+  "scripts": {
+    
+    "start:dev":"nodemon server.js",
+    "start":"node server.js"
+
+  },
+  "author": "",
+  "license": "ISC"
+}
