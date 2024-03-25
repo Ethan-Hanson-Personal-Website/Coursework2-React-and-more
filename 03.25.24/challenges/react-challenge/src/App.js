@@ -16,13 +16,43 @@
  */
 import "./index.css";
 import { PEOPLE_URL } from "./constants";
+import React, { useEffect, useState } from "react";
 
 export default function App() {
+  const [people, setPeople] = useState([]);
+  const [search, setSearch] = useState('');
+  const [filteredPeople, setFilteredPeople] = useState([]);
+
+  useEffect(() => {
+    fetch(PEOPLE_URL)
+      .then(response => response.json())
+      .then(data => {
+        setPeople(data.results);
+        setFilteredPeople(data.results);
+      });
+  }, []);
+
+  const searchPeople = (searchValue) => {
+    setSearch(searchValue);
+    if (searchValue !== '') {
+      const filteredData = people.filter((person) =>
+        person.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setFilteredPeople(filteredData);
+    } else {
+      setFilteredPeople(people);
+    }
+  };
+
   return (
     <div className="App">
-      Hello There
-      <Modal />
+    Hello There
+    <div>
+      <input type="text" value={search} onChange={e => searchPeople(e.target.value)} placeholder="Search" />
+    </div>
+    <Modal />
       {/* <Grid /> */}
+      <Grid people={filteredPeople} />
     </div>
   );
 }
@@ -39,12 +69,11 @@ function Modal() {
 function Grid({ people }) {
   return (
     <div className="grid">
-      <div className="grid-item">Name 1</div>
-      <div className="grid-item">Name 2</div>
-      <div className="grid-item">Name 3</div>
-      <div className="grid-item">Name 4</div>
-      <div className="grid-item">Name 5</div>
-      <div className="grid-item">Name 6</div>
+     {people.map((person, index) => (
+       <div className="grid-item" key={index}>
+         {person.name}
+       </div>
+     ))}
     </div>
   );
 }
